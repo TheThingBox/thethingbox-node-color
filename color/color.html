@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="/farbtastic/farbtastic.css"/>
+<script src="/farbtastic/farbtastic.js"></script>
+<script type="text/x-red" data-template-name="color">
+	 <div class="form-row" style="padding-top:10px;">
+        Apply on msg.<input type="text" id="node-input-property" style="width: 200px;"/>
+    </div>
+	<div class = "form-row">
+        <label for="node-input-textcolor"><i class = "icon-tag"></i> Color </label>
+        <input type="text" id="node-input-color" placeholder="#FFFFFF">
+    </div>
+	<div class="form-row" id="colorpicker"></div>
+	<script>
+		var f = $.farbtastic ( "#colorpicker" );
+		var input = $ ( "#node-input-color" );
+		input.on ( "change", function ( ) { f.linkTo ( input ); } );
+		f.linkTo ( input );
+		$ ( ".farbtastic" ).css ( "margin", "auto" );
+	</script>
+</script>
+<!--
+<script type="text/x-red" data-help-name="color">
+	This node allows you to chose a color from a colorpicker. The selected color will be registered in <b>msg.color</b>.
+</script>
+-->
+<script type="text/javascript">
+    RED.nodes.registerType('color',{
+        category: 'function',
+        color:"#ffffff",
+        defaults: {
+			property: {value:"color", required:true},
+            color: {value:"#ffffff",  required:true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "colors.jpg",
+        align: "right",
+        label: function() {
+            return this.name||"color";
+        }
+	});
+</script>
