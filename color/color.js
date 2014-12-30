@@ -7,10 +7,6 @@ module.exports = function ( RED ) {
 		RED.nodes.createNode( this, n );
 		
 		
-		var farb_path = __dirname+"/resources/farbtastic/";
-
-		RED.httpNode.use('/farbtastic', express.static(farb_path));
-		
 		this.color = n.color;
 		this.property = n.property;
 		var node = this;
@@ -27,4 +23,7 @@ module.exports = function ( RED ) {
 		});
 	}
 	RED.nodes.registerType("color", color);
+
+	var farb_path = __dirname+"/resources/farbtastic/";
+	RED.httpNode.use('/farbtastic', express.static(farb_path));
 }
