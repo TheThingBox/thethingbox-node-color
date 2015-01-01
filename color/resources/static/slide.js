@@ -1,41 +1,46 @@
-//(function( $ ) {
+(function( $ ) {
 	$.fn.slide = function(opt) {
 		
 		var content = this;
-		var line = $('<div class="line"></div>');
-			var line_style = {
-				top: "0px",
-				left: "10px",
-				height: "1px",
-				width: "100px",
-				background: "black",
-			}
-			line.css(line_style);
 		
-		var header = $('<div class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">Advanced</div>');
-	//	header.css({
-			//	top: "0px",
-			//	left: "10px",
-			//	height: "1px",
-			//	width: "100px",
-		//		background: "black",
-		//	});
-//		header.append(line);
+		var header = $('<div class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all"></div>');
+		header.css({
+				cursor: "pointer",
+//				display: "inline-block",
+		});
+		
+		// header.append(opt.title||'<span><span class="ui-icon ui-icon-triangle-1-e"></span>Advanced</span>');
+		header.append(opt.title||'<span>Advanced</span>');
+		
+		var icon = $('<span></span>');
+		icon.css({
+				display: "inline-block",
+		});
+		
+		
+		header.prepend(icon);
+		
+		var icon_up = $('<span class="ui-icon ui-icon-triangle-1-e"></span>');
+		var icon_down = $('<span class="ui-icon ui-icon-triangle-1-s"></span>');
+
 		
 		content.hide();
 		var isShown = false;
 		if(opt.onUp) opt.onUp();
+		icon.html(icon_up);
 		
 		function change(){
 			if (isShown){
 				content.slideUp();
 				if(opt.onUp) opt.onUp();
 				isShown = false;
+				icon.html(icon_up);
 			}
 			else{
 				content.slideDown();
 				if(opt.onDown) opt.onDown();
 				isShown = true;
+				icon.html(icon_down);
 			}
 		}
 		
@@ -45,4 +50,4 @@
 		});
 
 	};
-//}( jQuery ));
+}( jQuery ));

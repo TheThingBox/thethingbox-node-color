@@ -9,7 +9,7 @@
 	<div class="form-row" id="colorpicker"></div>
 		<div class = "form-row">
 			<label for="node-input-textcolor"><i class = "icon-tag"></i> Color </label>
-			<input type="text" id="node-input-color" placeholder="#FFFFFF">
+			<input type="text" id="node-input-color">
 		</div>
     <div class="advanced">
 		<div class="form-row" style="padding-top:10px;">
@@ -27,31 +27,31 @@
         category: 'function',
         color:"#ffffff",
         defaults: {
+			name: {value:"", required:false},
 			property: {value:"color", required:true},
             color: {value:"#ffffff",  required:true}
         },
         inputs:1,
         outputs:1,
-        icon: "colors.jpg",
-        align: "right",
+		icon: "colors.png",
         label: function() {
             return this.name||"color";
         },
 		oneditprepare: function(){
-			$.getScript('/color/farbtastic/farbtastic.js');
-			
-			var f = $.farbtastic ( "#colorpicker" );
-			var input = $ ( "#node-input-color" );
-			input.on ( "change", function ( ) { f.linkTo ( input ); } );
-			f.linkTo ( input );
-			$ ( ".farbtastic" ).css ( "margin", "auto" );
-			
-			$.getScript('/color/slide.js');
-			$(".advanced").slide({
-				onUp: function(){$('#node-input-color').css("font-size", "0");},
-				onDown: function(){$('#node-input-color').css("font-size", "");}
+			$.getScript('/color/farbtastic/farbtastic.js', function(){
+				var f = $.farbtastic ( "#colorpicker" );
+				var input = $ ( "#node-input-color" );
+				input.on ( "change", function ( ) { f.linkTo ( input ); } );
+				f.linkTo ( input );
+				$ ( ".farbtastic" ).css ( "margin", "auto" );
 			});
-
+			
+			$.getScript('/color/slide.js', function(){
+				$(".advanced").slide({
+					onUp: function(){$('#node-input-color').css("font-size", "0");},
+					onDown: function(){$('#node-input-color').css("font-size", "");}
+				});
+			});
 		}
 	});
 </script>
